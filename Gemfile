@@ -19,8 +19,8 @@ end
 gem 'ember-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+#Use rabl-rails for JSON views in API
+gem 'rabl-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
