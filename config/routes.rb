@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      #This will be a full resource eventually
-      get 'messages/index'
-      get 'messages/show'
+      resources :messages, only: [:index, :show]
+    end
   end
 
   get 'public/index'
