@@ -27,6 +27,13 @@ module MessageCenter
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Don't generate view and helper specs, integration
+    # specs will cover this
+    config.generators do |g|
+      g.view_specs false
+      g.helper_specs false
+    end
+
     # Ember configuration
     config.ember.app_name = 'MessageCenter'
   end
