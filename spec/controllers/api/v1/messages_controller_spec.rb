@@ -3,17 +3,19 @@ require 'rails_helper'
 RSpec.describe Api::V1::MessagesController, :type => :controller do
 
   describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      expect(response).to be_success
-    end
+
+    subject { get 'index' }
+
+    it { is_expected.to be_success }
+
   end
 
   describe "GET 'show'" do
-    it "returns http success" do
-      get 'show'
-      expect(response).to be_success
-    end
+
+    subject { get 'show' }
+
+    it { is_expected.to be_success }
+
   end
 
 end
