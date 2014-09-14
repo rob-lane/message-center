@@ -1,16 +1,23 @@
 <script type="text/x-handlebars" id="message">
   <ul class='message-field'>
+    <li>{{recipients}}</li>
     <li><h4>{{subject}}</h4></li>
     <li>{{body}}</li>
   </ul>
 </script>
 
 <script type="text/x-handlebars" id="messages/new">
-  <h1>Create a new message</h1>
   <form {{action "createMessage" on="submit"}}>
+    <h1>Create a new message</h1>
+    <div class='field-control'>
+      <label for='recipients'>Recipients</label>
+      {{#if dirtyForm}}
+        <div class='form-field-error'>{{errors.recipients}}</div>
+      {{/if}}
+      {{input type="text" id='recipients' name='recipients' class='form-field' valueBinding="model.recipients" autofocus=true}}
     <div class='field-control'>
       <label for='subject'>Subject</label>
-      {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject" autofocus=true}}
+      {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject"}}
     </div>
 
     <div class='field-control'>

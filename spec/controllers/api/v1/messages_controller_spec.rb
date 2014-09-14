@@ -5,13 +5,11 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
   let!(:test_msg) { FactoryGirl.create(:message) }
 
-  let (:expected_json) { {message: test_msg}.to_json }
+  let (:body) { JSON.parse(response.body) }
 
   describe "GET 'index'" do
 
     subject! { get 'index', format: :json }
-
-    let (:expected_json) { {messages: [test_msg] }.to_json }
 
     it { is_expected.to be_success }
 
@@ -20,7 +18,8 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
     end
 
     it "responds with a JSON body" do
-      expect(response.body).to eq(expected_json)
+      msg = body['messages'].select {|msg| msg['id'] == test_msg.id }
+      expect(msg).to_not be_nil
     end
 
   end
@@ -36,7 +35,7 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
     end
 
     it "responds with a JSON body" do
-      expect(response.body).to eq(expected_json)
+      expect(body['message']['id']).to eq test_msg.id
     end
 
     context "with an invalid ID" do
@@ -54,9 +53,12 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
     let!(:test_msg) { FactoryGirl.build(:message) }
 
-    let(:post_json) { {message: test_msg }.to_json }
+    let(:post_json) do
+      {message: test_msg.attributes.
+          merge(recipients: test_msg.recipients.map(&:email))}
+    end
 
-    subject! { post 'create', {message: test_msg.attributes}, format: :json }
+    subject! { post 'create', post_json, format: :json }
 
     it "responds with a redirect" do
       expect(response).to have_http_status(302)
