@@ -54,9 +54,12 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
     let!(:test_msg) { FactoryGirl.build(:message) }
 
-    let(:post_json) { {message: test_msg }.to_json }
+    let(:post_json) do
+      {message: test_msg.attributes.
+          merge(recipients: test_msg.recipients.map(&:email))}
+    end
 
-    subject! { post 'create', {message: test_msg.attributes}, format: :json }
+    subject! { post 'create', post_json, format: :json }
 
     it "responds with a redirect" do
       expect(response).to have_http_status(302)
