@@ -6,7 +6,7 @@ MessageCenter.ApplicationStore = DS.Store.extend({
 // is built to work nicely with the ActiveModel::Serializers gem.
 MessageCenter.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   namespace: 'api/v1',
-  headers: {
-    "X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')
-  }
+  headers: Ember.computed(function(){
+    return {"X-CSRF-Token": $('meta[name="csrf-token"]').attr('content')}
+  })
 });
