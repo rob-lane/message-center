@@ -7,7 +7,7 @@
 
 <script type="text/x-handlebars" id="messages/new">
   <h1>Create a new message</h1>
-  <form {{action "createUser" on="submit"}}>
+  <form {{action "createMessage" on="submit"}}>
     <div class='field-control'>
       <label for='subject'>Subject</label>
       {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject" autofocus=true}}
