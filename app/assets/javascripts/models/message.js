@@ -6,7 +6,10 @@ MessageCenter.Message = DS.Model.extend(Ember.Validations.Mixin, {
   recipients: DS.attr('list'),
   validations: {
     recipients: {
-      format: /\b\w+@[\w.]+\.[A-z.]{2,4}\b/
+      format: {
+        with: /\b\w+@[\w.]+\.[A-z.]{2,4}\b/,
+        message: 'Must be a valid email address, seperate multiple emails with a comma'
+      }
     },
     body: {
       presence: { message: 'A message body is required...' }
