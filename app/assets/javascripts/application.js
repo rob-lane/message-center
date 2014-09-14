@@ -2,6 +2,7 @@
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require ember-validations
 //= require_self
 //= require ./message_center
 
