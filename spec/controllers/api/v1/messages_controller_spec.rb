@@ -45,18 +45,16 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
     let!(:test_msg) { FactoryGirl.build(:message) }
 
-    let(:post_json) { {message: new_msg }.to_json }
+    let(:post_json) { {message: test_msg }.to_json }
 
-    subject! { post 'create', message: post_json, format: :json }
+    subject! { post 'create', {message: test_msg.attributes}, format: :json }
 
-    it { is_expected.to be_success }
-
-    it "creates a new message" do
-      expect(assigns(:message)).to be_a_new(Message)
+    it "responds with a redirect" do
+      expect(response).to have_http_status(302)
     end
-
-    it "responds with a JSON body" do
-      expect(responds.body).to eq(expected_json)
+    it "creates a new message" do
+      expect(assigns(:message)).to be_a(Message)
+      expect(assigns(:message).id).to_not be_nil
     end
 
   end
