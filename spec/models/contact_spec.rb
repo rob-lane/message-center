@@ -24,6 +24,16 @@ RSpec.describe Contact, :type => :model do
 
     end
 
+    context "with an existing contact email" do
+
+      before do
+        FactoryGirl.create :contact
+      end
+
+      it { is_expected.to_not be_valid }
+
+    end
+
   end
 
 end
