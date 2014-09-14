@@ -6,7 +6,7 @@ class MessageMailer < ActionMailer::Base
   #
   #   en.message_mailer.send_mesage.subject
   #
-  def send_mesage(message)
+  def send_message(message)
     @body = message.body
     mail to: message.recipients.map(&:email), subject: message.subject
   end
