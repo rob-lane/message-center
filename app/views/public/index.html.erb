@@ -1,5 +1,6 @@
 <script type="text/x-handlebars" id="message">
   <ul class='message-field'>
+    <li>{{recipients}}</li>
     <li><h4>{{subject}}</h4></li>
     <li>{{body}}</li>
   </ul>
@@ -9,8 +10,11 @@
   <h1>Create a new message</h1>
   <form {{action "createMessage" on="submit"}}>
     <div class='field-control'>
+      <label for='recipients'>Recipients</label>
+      {{input type="text" id='recipients' name='recipients' class='form-field' valueBinding="model.recipients" autofocus=true}}
+    <div class='field-control'>
       <label for='subject'>Subject</label>
-      {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject" autofocus=true}}
+      {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject"}}
     </div>
 
     <div class='field-control'>
