@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :message do
     subject "MyString"
     body "MyString"
+    recipients {[FactoryGirl.create(:contact)]}
   end
 end

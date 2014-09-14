@@ -7,6 +7,10 @@ RSpec.describe Message, :type => :model do
 
     subject { FactoryGirl.build(:message) }
 
+    before do
+      puts subject.recipients
+    end
+
     it { is_expected.to be_valid }
 
     # No empty body messages

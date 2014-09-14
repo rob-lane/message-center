@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :contact do
-    email "foo@bar.com"
+    email "rspec-tester@msgs.com"
   end
 end
