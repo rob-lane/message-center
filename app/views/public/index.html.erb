@@ -4,3 +4,23 @@
     <li>{{body}}</li>
   </ul>
 </script>
+
+<script type="text/x-handlebars" id="messages/new">
+  <h1>Create a new message</h1>
+  <form {{action "createUser" on="submit"}}>
+    <div class='field-control'>
+      <label for='subject'>Subject</label>
+      {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject" autofocus=true}}
+    </div>
+
+    <div class='field-control'>
+      <label for='body'>Body</label>
+      {{textarea id='body' name='body' class='form-field' cols='80' rows='6' valueBinding="model.body" }}
+    </div>
+
+    <div class='field-control'>
+      {{input id='submit-message' type='submit' value='Create'}}
+    </div>
+  </form>
+
+</script>
