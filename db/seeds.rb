@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+messages = Message.create([{
+    subject: 'This is a test',
+    body: 'Created by the rails db/seeds.rb file!'}])
