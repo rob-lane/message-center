@@ -39,6 +39,15 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
       expect(response.body).to eq(expected_json)
     end
 
+    context "with an invalid ID" do
+
+      subject! {get 'show', id: 0, format: :json }
+
+      it "responds with an error" do
+        expect(response).to have_http_status(500)
+      end
+    end
+
   end
 
   describe "POST 'create'" do
@@ -55,6 +64,16 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
     it "creates a new message" do
       expect(assigns(:message)).to be_a(Message)
       expect(assigns(:message).id).to_not be_nil
+    end
+
+    context "without a body" do
+
+      let!(:test_msg) { FactoryGirl.build(:message, body: nil)}
+
+      it "responds with an error" do
+        expect(response).to have_http_status(500)
+      end
+
     end
 
   end
