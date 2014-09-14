@@ -5,5 +5,11 @@ class Message < ActiveRecord::Base
   validates_presence_of :recipients
   validates_associated :recipients
 
+  after_save :send_to_recipients
+
+  def send_to_recipients
+    MessageMailer.send_message(self).deliver
+  end
+
 
 end

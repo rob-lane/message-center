@@ -17,6 +17,13 @@ RSpec.describe Message, :type => :model do
       it { is_expected.to_not be_valid }
     end
 
+    context "saving"do
+
+      it "sends the message"do
+        expect {subject.save}.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
+    end
 
   end
 
