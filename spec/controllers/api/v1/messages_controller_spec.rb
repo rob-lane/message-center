@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::MessagesController, :type => :controller do
+  render_views
 
   let!(:test_msg) { FactoryGirl.create(:message) }
 
@@ -26,7 +27,7 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
     subject! { get 'show', id: test_msg.id, format: :json }
 
-    let (:expected_json) { test_msg.to_json }
+    let (:expected_json) { {message: test_msg}.to_json }
 
     it { is_expected.to be_success }
 
@@ -37,8 +38,6 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
     it "responds with a JSON body" do
       expect(response.body).to eq(expected_json)
     end
-
-
 
   end
 
