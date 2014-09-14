@@ -15,12 +15,14 @@
 
     <div class='field-control'>
       <label for='body'>Body</label>
-      {{textarea id='body' name='body' class='form-field' cols='80' rows='6' valueBinding="model.body" }}
+        {{#if dirtyForm}}
+          <div class='form-field-error'>{{errors.body}}</div>
+        {{/if}}
+      {{textarea id='body' name='body' class='form-field' cols='80' rows='6' valueBinding="model.body"}}
     </div>
 
     <div class='field-control'>
       {{input id='submit-message' type='submit' value='Create'}}
     </div>
   </form>
-
 </script>
