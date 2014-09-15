@@ -1,6 +1,19 @@
-<ul class='message-field'>
-  <li>{{recipients}}</li>
-  <li><h4>{{subject}}</h4></li>
-  <li>{{{body}}}</li>
-  <li>{{link_count}}</li>
-</ul>
+<p>
+  <strong>Recipients &mdash;</strong> {{recipients}}
+</p>
+
+<p>
+  <strong>Subject &mdash;</strong> {{subject}}
+</p>
+
+<p>
+  <strong>Link Count &mdash;</strong> {{link_count}}
+</p>
+
+<hr />
+
+<section id="body-content">
+  {{{body}}}
+</section>
+
+<hr />
