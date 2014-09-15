@@ -48,3 +48,22 @@ MessageCenter.MessagesNewController = Ember.ObjectController.extend({
     serverError: null
   }
 });
+MessageCenter.MessagesEditController = Ember.ObjectController.extend({
+  actions: {
+    updateMessage: function() {
+      var self = this;
+
+      function transitionToMessage(message) {
+        self.transitionToRoute('message', message);
+      }
+
+      this.model.validate().then(function() {
+        if (self.model.get('isValid')) {
+          self.model.save().then(transitionToMessage).catch(function(reason) {
+            this.set('serverError', reason);
+          });
+        }
+      });
+    }
+  }
+})
