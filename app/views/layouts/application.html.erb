@@ -2,15 +2,30 @@
 <html>
 <head>
   <title>MessageCenter</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" %>
+  <%= javascript_include_tag 'application'%>
   <%= javascript_include_tag "templates/all" %>
   <%= javascript_include_tag "//tinymce.cachefly.net/4.1/tinymce.min.js" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-<header>
+<header class="container">
+  <% if current_user %>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a href="#/messages/">Messages</a></li>
+          <li><a href="#/messages/new">Create Message</a></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 </header>
