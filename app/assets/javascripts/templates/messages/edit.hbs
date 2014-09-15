@@ -1,0 +1,21 @@
+<form {{action "updateMessage" on="submit"}}>
+<div class='field-control'>
+  <label>Recipients</label>
+  <div class='read-only-field'>{{recipients}}</div>
+</div>
+<div class='field-control'>
+  <label for='subject'>Subject</label>
+  {{input type='text' id='subject' name='subject' class='form-field' valueBinding='model.subject'}}
+</div>
+<div class='field-control'>
+  <label for='body'>Body</label>
+  {{#if errors.body}}
+  <div class='form-field-error'>{{errors.body}}</div>
+  {{/if}}
+  {{view MessageCenter.TinymceView id='body' name='body' class='form-field' cols='80' rows='6' valueBinding='model.body'}}
+</div>
+
+<div class='field-control'>
+  {{input id='submit-message' type='submit' value='Save'}}
+</div>
+</form>

@@ -48,3 +48,56 @@ MessageCenter.MessagesNewController = Ember.ObjectController.extend({
     serverError: null
   }
 });
+MessageCenter.MessagesEditController = Ember.ObjectController.extend({
+  actions: {
+    updateMessage: function() {
+      var self = this;
+
+      function transitionToMessage(message) {
+        self.transitionToRoute('message', message);
+      }
+
+      this.model.validate().then(function() {
+        if (self.model.get('isValid')) {
+          self.model.save().then(transitionToMessage).catch(function(reason) {
+            this.set('serverError', reason);
+          });
+        }
+      });
+    }
+  }
+});
+MessageCenter.MessagesDestroyController = Ember.ObjectController.extend({
+  actions: {
+    cancel: function() {
+      this.transitionToRoute('messages');
+    },
+    confirm: function() {
+      this.model.destroy().then(function() {
+        this.transitionToRoute('messages');
+      });
+    }
+  }
+});
+MessageCenter.MessagesForwardController = Ember.ObjectController.extend({
+  actions: {
+    cancel: function() {
+      this.transitionToRoute('messages');
+    },
+    confirm: function() {
+      var self = this;
+
+      this.model.validate().then(function() {
+        if (self.model.get('isValid')) {
+          self.model.save().then(function() {
+            self.model.reload();
+            self.transitionToRoute('messages');
+          });
+        }
+      });
+
+
+    }
+  },
+  newRecipients: ""
+});
