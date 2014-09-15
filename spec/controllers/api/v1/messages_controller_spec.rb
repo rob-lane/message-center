@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Api::V1::MessagesController, :type => :controller do
   render_views
 
+  login_user
+
   let!(:test_msg) { FactoryGirl.create(:message) }
 
   let (:body) { JSON.parse(response.body) }
