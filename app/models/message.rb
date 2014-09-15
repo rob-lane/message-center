@@ -14,11 +14,13 @@ class Message < ActiveRecord::Base
   end
 
   def collect_links
-    self.links << text_body.scan(Link.url_format)
+    text_body.scan(Link.url_format).map {|m| m[1] }.flatten.each do |url|
+      self.links.create(url: url)
+    end
   end
 
   def text_body
-    Nokogiri::HTML(@body).xpath("//text()").to_s
+    Nokogiri::HTML(body).xpath("//text()").to_s
   end
 
 
