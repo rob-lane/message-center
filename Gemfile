@@ -19,6 +19,8 @@ end
 gem 'ember-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# Nokogiri for html manipulation
+gem 'nokogiri'
 #Use rabl-rails for JSON views in API
 gem 'rabl-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
