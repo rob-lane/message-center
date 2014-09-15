@@ -1,14 +1,8 @@
 MessageCenter.MessagesController = Ember.ArrayController.extend({
   actions: {
     sort: function(sort_field) {
-      if (this.get('isSorted')) {
-        if (this.get('sortProperties').indexOf(sort_field) < 0) {
-          this.toggleProperty('sortAscending');
-        }
-      } else {
-        this.set('sortProperties', [sort_field])
-        this.set('isSorted', true)
-      }
+      this.set('sortProperties', [sort_field]);
+      this.toggleProperty('sortAscending');
     }
   }
 });
