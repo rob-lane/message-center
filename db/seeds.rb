@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+test_user = User.create({email: 'roblane09@gmail.com', password: 'password' })
+
 messages = Message.create([{
     subject: 'This is a test',
-    body: 'Created by the rails db/seeds.rb file!'}])
+    body: 'Created by the rails db/seeds.rb file!',
+    user: test_user}])

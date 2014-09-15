@@ -5,12 +5,16 @@ class Api::V1::MessagesController < Api::V1::BaseController
   before_action :find_message, only: [:show, :update, :destroy, :forward]
 
   def index
-    @messages = Message.order('created_at DESC')
+    @messages = current_user.messages
     respond_with @messages
   end
 
   def show
-    respond_with @message
+    if @message.user_id != current_user.id
+      render json: {message: "Message does not belong to your user"}, status: 401
+    else
+      respond_with @message
+    end
   end
 
   def create
@@ -54,7 +58,8 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   private
     def message_params
-      params.require(:message).permit :subject, :body, recipient_ids: []
+      params[:message][:user_id] = current_user.id
+      params.require(:message).permit :subject, :body, :user_id, recipient_ids: []
     end
 
     def contact_params(email)

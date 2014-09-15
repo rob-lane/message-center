@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Api::V1::MessagesController, :type => :controller do
   render_views
 
-  let!(:test_msg) { FactoryGirl.create(:message) }
+  login_user
+
+  let!(:test_msg) { FactoryGirl.create(:message, user: @user) }
 
   let (:body) { JSON.parse(response.body) }
 
@@ -13,7 +15,7 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
     it { is_expected.to be_success }
 
-    it "assigns all messages" do
+    it "assigns all users messages" do
       expect(assigns(:messages)).to eq([test_msg])
     end
 

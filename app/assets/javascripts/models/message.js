@@ -24,6 +24,7 @@ MessageCenter.ListTransform = DS.Transform.extend({
     return serialized.join(',');
   },
   serialize: function(deserialized) {
+    deserialized = deserialized || '';
     return deserialized.split(',');
   }
 });
