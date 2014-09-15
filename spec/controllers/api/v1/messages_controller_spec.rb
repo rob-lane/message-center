@@ -103,7 +103,7 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
     context "including recipients" do
 
       let(:put_params) do
-        {id: existing_message.id, message: {recipients: ['rspec@tester.com'] },
+        {id: existing_message.id, message: {new_recipients: ['rspec@tester.com'] },
           format: :json}
       end
 

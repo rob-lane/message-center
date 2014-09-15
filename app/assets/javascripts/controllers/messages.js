@@ -87,8 +87,6 @@ MessageCenter.MessagesForwardController = Ember.ObjectController.extend({
     confirm: function() {
       var self = this;
 
-      this.model.set('recipients', this.newRecipients);
-
       this.model.validate().then(function() {
         if (self.model.get('isValid')) {
           self.model.save().then(function() {

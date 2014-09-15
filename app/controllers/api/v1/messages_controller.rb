@@ -1,7 +1,7 @@
 class Api::V1::MessagesController < Api::V1::BaseController
   rescue_from ActiveRecord::RecordNotFound, with: :render_exception
 
-  before_action :collect_recip_ids!, only: [:create, :forward]
+  before_action :collect_recipient_ids, only: [:create, :forward]
   before_action :find_message, only: [:show, :update, :destroy, :forward]
 
   def index
@@ -28,10 +28,13 @@ class Api::V1::MessagesController < Api::V1::BaseController
   end
 
   def update
-    if params[:message] && params[:message][:recipients]
-      collect_recip_ids!
+    if params[:message] && params[:message][:new_recipients]
+      ## Fetch or create new recipient contacts
+      collect_recipient_ids(params[:message][:new_recipients])
+      ## Include existing ids for update
       params[:message][:recipient_ids].concat(@message.recipient_ids).uniq
-      @message.send_to_recipients(params[:message][:recipients])
+      ## Send to new recipients
+      @message.send_to_recipients(params[:message][:new_recipients])
     end
 
     if @message.update(message_params)
@@ -59,9 +62,11 @@ class Api::V1::MessagesController < Api::V1::BaseController
       params.require(:message).require(:contact).permit :email
     end
 
-    def collect_recip_ids!
+    def collect_recipient_ids(recipients = nil)
       params[:message][:recipient_ids] = []
-      params[:message][:recipients].each do |email|
+      recipients ||= params[:message][:recipients]
+
+      recipients.each do |email|
         existing = Contact.find_by_email(email)
         new = Contact.create(contact_params(email)) if existing.nil?
         params[:message][:recipient_ids] << (existing.nil? ? new.id : existing.id)
