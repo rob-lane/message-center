@@ -14,3 +14,8 @@ MessageCenter.MessagesNewRoute = Ember.Route.extend({
     controller.set('model', message);
   }
 });
+MessageCenter.MessagesEditRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('message', params.message_id);
+  }
+});
