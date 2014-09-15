@@ -25,7 +25,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   def update
     if @message.update(message_params)
-      redirect_to api_v1_message_path(@message)
+      respond_with @message
     else
       render_exception("Failed to update message")
     end
