@@ -17,14 +17,6 @@ RSpec.describe Message, :type => :model do
       it { is_expected.to_not be_valid }
     end
 
-    context "saving"do
-
-      it "sends the message"do
-        expect {subject.save}.to change { ActionMailer::Base.deliveries.count }.by(1)
-      end
-
-    end
-
   end
 
   context "created with links" do
@@ -34,6 +26,17 @@ RSpec.describe Message, :type => :model do
     it "should have associated link objects" do
       expect(subject.links).to_not be_empty
     end
+  end
+
+
+  context "sending to recipients"do
+
+    subject { FactoryGirl.create(:message) }
+
+    it "sends the message through ActionMailer" do
+      expect {subject.send_to_recipients}.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
   end
 
 end

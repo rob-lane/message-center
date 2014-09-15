@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :messages, only: [:index, :show, :create]
+      resources :messages, except: [:new, :edit]
+      post 'messages/forward'
     end
   end
 

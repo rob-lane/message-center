@@ -6,9 +6,10 @@ class MessageMailer < ActionMailer::Base
   #
   #   en.message_mailer.send_mesage.subject
   #
-  def send_message(message)
+  def send_message(message, recips = nil)
     @html_body = message.body
     @text_body = message.text_body
-    mail to: message.recipients.map(&:email), subject: message.subject
+    recips ||= message.recipients.map(&:email)
+    mail to: recips, subject: message.subject
   end
 end

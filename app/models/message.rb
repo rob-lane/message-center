@@ -6,11 +6,10 @@ class Message < ActiveRecord::Base
   validates_presence_of :recipients
   validates_associated :recipients
 
-  after_save :send_to_recipients
   after_create :collect_links
 
-  def send_to_recipients
-    MessageMailer.send_message(self).deliver
+  def send_to_recipients(recips = nil)
+    MessageMailer.send_message(self, recips).deliver
   end
 
   def collect_links

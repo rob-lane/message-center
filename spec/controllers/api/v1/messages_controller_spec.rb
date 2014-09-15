@@ -80,4 +80,70 @@ RSpec.describe Api::V1::MessagesController, :type => :controller do
 
   end
 
+  describe "Put 'update'" do
+
+    let!(:existing_message) { Message.first || FactoryGirl.create(:message)}
+
+    subject! { put 'update', put_params }
+
+    let(:test_subject) { 'A new subject' }
+
+    let(:test_object) do
+      { id: existing_message.id, subject: test_subject }
+    end
+
+    let(:put_params) do
+      {id: existing_message.id, message: test_object, format: :json}
+    end
+
+    it "should update the subject" do
+      expect(assigns(:message).subject).to eq(test_subject)
+    end
+
+    it "should respond with a redirect" do
+      expect(response).to redirect_to(api_v1_message_path(existing_message))
+    end
+
+  end
+
+  describe "Delete 'destroy'" do
+
+    let(:existing_message) { Message.first || FactoryGirl.create(:message) }
+
+    let(:delete_params) do
+      {id: existing_message.id, format: :json}
+    end
+
+    it "should destroy the requested message" do
+      expect {
+        delete 'destroy', delete_params
+      }.to change(Message, :count).by(-1)
+    end
+
+    it "should respond with a redirect" do
+      delete 'destroy', delete_params
+      expect(response).to redirect_to(api_v1_messages_path)
+    end
+  end
+
+  describe "post 'forward'" do
+
+    let(:existing_message) { Message.first || FactoryGirl.create(:message) }
+
+    let(:post_params) do
+      {id: existing_message.id, message: {recipients: ['tester@rspec.com']}, format: :json }
+    end
+
+    it "should send a new notification through ActionMailer" do
+      expect {
+        post 'forward', post_params
+      }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it "should respond with a redirect" do
+      post 'forward', post_params
+      expect(response).to redirect_to(api_v1_message_path(existing_message))
+    end
+  end
+
 end
