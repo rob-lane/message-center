@@ -66,4 +66,15 @@ MessageCenter.MessagesEditController = Ember.ObjectController.extend({
       });
     }
   }
+});
+MessageCenter.MessagesDestroyController = Ember.ObjectController.extend({
+  actions: {
+    cancel: function() {
+      this.transitionToRoute('messages');
+    },
+    confirm: function() {
+      this.model.destroy();
+      this.transitionToRoute('messages');
+    }
+  }
 })

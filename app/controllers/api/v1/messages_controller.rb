@@ -33,7 +33,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   def destroy
     if @message.destroy
-      redirect_to api_v1_messages_path
+      respond_with message: 'success!'
     else
       render_exception("Failed to destroy message")
     end
