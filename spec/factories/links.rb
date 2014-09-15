@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :link do
-    url "MyString"
+    url "http://foo.com"
+    message
   end
 end
