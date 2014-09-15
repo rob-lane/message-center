@@ -3,6 +3,9 @@
   <div class="field-control">
     <label for="recipients">Recipients</label>
     {{input type="text" name="recipients" id="recipients" valueBinding="newRecipients"}}
+    {{#if errors.recipient}}
+      <div class="form-field-error">{{errors.recipient}}</div>
+    {{/if}}
   </div>
   <div class="field-control">
     <button {{action 'cancel'}} id='cancel-forward'>Cancel</button>

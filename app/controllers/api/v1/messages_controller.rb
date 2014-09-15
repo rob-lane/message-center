@@ -30,6 +30,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
   def update
     if params[:message] && params[:message][:recipients]
       collect_recip_ids!
+      params[:message][:recipient_ids].concat(@message.recipient_ids).uniq
       @message.send_to_recipients(params[:message][:recipients])
     end
 
