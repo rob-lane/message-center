@@ -54,7 +54,8 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   private
     def message_params
-      params.require(:message).permit :subject, :body, recipient_ids: []
+      params[:message][:user_id] = current_user.id
+      params.require(:message).permit :subject, :body, :user_id, recipient_ids: []
     end
 
     def contact_params(email)

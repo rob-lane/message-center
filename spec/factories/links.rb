@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :link do
     url "http://foo.com"
-    message
+    message { FactoryGirl.create(:message_with_user) }
   end
 end
