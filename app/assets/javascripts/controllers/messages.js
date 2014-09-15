@@ -1,4 +1,4 @@
-MessageCenter.MessagesController = Ember.ArrayController.extend({
+MessageCenter.MessagesIndexController = Ember.ArrayController.extend({
   actions: {
     sort: function(sort_field) {
       this.set('sortProperties', [sort_field]);
