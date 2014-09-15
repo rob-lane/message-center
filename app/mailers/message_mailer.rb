@@ -7,7 +7,8 @@ class MessageMailer < ActionMailer::Base
   #   en.message_mailer.send_mesage.subject
   #
   def send_message(message)
-    @body = message.body
+    @html_body = message.body
+    @text_body = Nokogiri::HTML(@html_body).xpath("//text()").to_s
     mail to: message.recipients.map(&:email), subject: message.subject
   end
 end
