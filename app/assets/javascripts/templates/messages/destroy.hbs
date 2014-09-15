@@ -1,7 +1,22 @@
-<form id="confim-form">
-  <h2>Are you sure you want to delete the following message?</h2>
-  <button {{action "cancel"}} id='cancel-delete'>Cancel</button>
-  <button {{action "confirm"}} id='confirm-delete'>Delete</button>
-</form>
+<section class="container">
+  <div class="col-md-9 col-md-offset1">
+    <form id="confim-form">
+      <h4>Are you sure you want to delete the following message?</h4>
 
-{{partial "partials/message"}}
+
+    </form>
+  </div>
+  <div class="col-md-11">
+    {{partial "partials/message"}}
+  </div>
+
+  <div class="col-md-9 col-md-offset1">
+    <div class="col-md-10">
+      <button class="btn btn-primary btn-lg" {{action "cancel"}} id='cancel-delete'>Cancel</button>
+      <button class="btn btn-default btn-lg" {{action "confirm"}} id='confirm-delete'>Delete</button>
+    </div>
+  </div>
+</section>
+
+
+
