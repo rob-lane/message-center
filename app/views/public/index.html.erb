@@ -34,3 +34,26 @@
     </div>
   </form>
 </script>
+
+<script type="text/x-handlebars" id="messages">
+  <table id='messages-table' class='index-table'>
+    <thead>
+      <tr>
+        <th class='sortable' {{action 'sort' 'subject'}}>Subject</th>
+        <th class='sortable' {{action 'sort' 'link_count'}}>Link Count</th>
+        <th class='sortable' {{action 'sort' 'created_at'}}>Created On</th>
+        <th class='sortable' {{action 'sort' 'updated_at'}}>Updated On</th>
+        <th>Edit</th><th>Delete</th><th>Forward</th>
+      </tr>
+      {{#each}}
+      <tr>
+        <td>{{subject}}</td><td>{{link_count}}</td>
+        <td>{{date created_at}}</td><td>{{date updated_at}}</td>
+        <td>{{#link-to 'messages.edit' message}}Edit{{/link-to}}</td>
+        <td>{{#link-to 'messages.destroy' message}}Delete{{/link-to}}</td>
+        <td>{{#link-to 'messages.forward' message}}Forward{{/link-to}}</td>
+      </tr>
+      {{/each}}
+    </thead>
+  </table>
+</script>

@@ -1,3 +1,6 @@
+MessageCenter.MessagesController = Ember.ArrayController.extend({
+
+});
 MessageCenter.MessagesNewController = Ember.ObjectController.extend({
   actions: {
     createMessage: function() {
@@ -39,5 +42,4 @@ MessageCenter.MessagesNewController = Ember.ObjectController.extend({
     dirtyForm: false,
     serverError: null
   }
-
 });
