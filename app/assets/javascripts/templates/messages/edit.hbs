@@ -1,21 +1,27 @@
-<form {{action "updateMessage" on="submit"}}>
-<div class='field-control'>
-  <label>Recipients</label>
-  <div class='read-only-field'>{{recipients}}</div>
-</div>
-<div class='field-control'>
-  <label for='subject'>Subject</label>
-  {{input type='text' id='subject' name='subject' class='form-field' valueBinding='model.subject'}}
-</div>
-<div class='field-control'>
-  <label for='body'>Body</label>
-  {{#if errors.body}}
-  <div class='form-field-error'>{{errors.body}}</div>
-  {{/if}}
-  {{view MessageCenter.TinymceView id='body' name='body' class='form-field' cols='80' rows='6' valueBinding='model.body'}}
-</div>
+<section class="container">
+  <div class="col-md-11">
+    <form role="form" {{action "updateMessage" on="submit"}}>
+    <div class='field-group'>
+      <label>Recipients</label>
+      <div class='read-only-field'>{{recipients}}</div>
+    </div>
+    <hr />
+    <div class='form-group'>
+      <label for='subject'>Subject</label>
+      {{input type='text' id='subject' name='subject' class='form-control' valueBinding='model.subject'}}
+    </div>
+    <div class='form-group'>
+      <label for='body'>Body</label>
+      {{#if errors.body}}
+      <div class='form-field-error help-block'>{{errors.body}}</div>
+      {{/if}}
+      {{view MessageCenter.TinymceView id='body' name='body' class='form-control' cols='80' rows='6' valueBinding='model.body'}}
+    </div>
 
-<div class='field-control'>
-  {{input id='submit-message' type='submit' value='Save'}}
-</div>
-</form>
+    <div class='field-control'>
+      {{input id='submit-message' type='submit' value='Save' class='btn btn-primary btn-lg'}}
+      <button class="btn btn-default btn-lg" {{action "cancelEdit"}}>Cancel</button>
+    </div>
+    </form>
+  </div>
+</section>
