@@ -1,3 +1,11 @@
+MessageCenter.MessagesController = Ember.ArrayController.extend({
+  actions: {
+    sort: function(sort_field) {
+      this.set('sortProperties', [sort_field]);
+      this.toggleProperty('sortAscending');
+    }
+  }
+});
 MessageCenter.MessagesNewController = Ember.ObjectController.extend({
   actions: {
     createMessage: function() {
@@ -39,5 +47,4 @@ MessageCenter.MessagesNewController = Ember.ObjectController.extend({
     dirtyForm: false,
     serverError: null
   }
-
 });
