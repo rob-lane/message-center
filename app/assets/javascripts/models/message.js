@@ -4,6 +4,7 @@ MessageCenter.Message = DS.Model.extend(Ember.Validations.Mixin, {
   created_at: DS.attr('string'),
   updated_at: DS.attr('string'),
   recipients: DS.attr('list'),
+  link_count: DS.attr('number'),
   validations: {
     recipients: {
       format: {

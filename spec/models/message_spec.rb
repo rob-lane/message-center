@@ -27,4 +27,13 @@ RSpec.describe Message, :type => :model do
 
   end
 
+  context "created with links" do
+
+    subject { FactoryGirl.create(:message_with_links) }
+
+    it "should have associated link objects" do
+      expect(subject.links).to_not be_empty
+    end
+  end
+
 end
