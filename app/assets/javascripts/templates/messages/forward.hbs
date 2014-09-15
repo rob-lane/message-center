@@ -1,0 +1,14 @@
+<form>
+  <h2>Enter a comma separated list of recipients</h2>
+  <div class="field-control">
+    <label for="recipients">Recipients</label>
+    {{input type="text" name="recipients" id="recipients" valueBinding="newRecipients"}}
+  </div>
+  <div class="field-control">
+    <button {{action 'cancel'}} id='cancel-forward'>Cancel</button>
+    <button {{action 'confirm'}} id='confirm-forward'>Forward</button>
+  </div>
+</form>
+
+{{partial 'partials/message'}}
+

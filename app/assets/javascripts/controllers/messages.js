@@ -73,8 +73,33 @@ MessageCenter.MessagesDestroyController = Ember.ObjectController.extend({
       this.transitionToRoute('messages');
     },
     confirm: function() {
-      this.model.destroy();
-      this.transitionToRoute('messages');
+      this.model.destroy().then(function() {
+        this.transitionToRoute('messages');
+      });
     }
   }
-})
+});
+MessageCenter.MessagesForwardController = Ember.ObjectController.extend({
+  actions: {
+    cancel: function() {
+      this.transitionToRoute('messages');
+    },
+    confirm: function() {
+      var self = this;
+
+      this.model.set('recipients', this.newRecipients);
+
+      this.model.validate().then(function() {
+        if (self.model.get('isValid')) {
+          self.model.save().then(function() {
+            self.model.reload();
+            self.transitionToRoute('messages');
+          });
+        }
+      });
+
+
+    }
+  },
+  newRecipients: ""
+});

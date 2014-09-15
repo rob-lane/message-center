@@ -14,6 +14,10 @@ class Api::V1::MessagesController < Api::V1::BaseController
   end
 
   def create
+    if params[:message].nil? || params[:message][:recipients].nil?
+      return render_exception('Missing recipients')
+    end
+
     @message = Message.create(message_params)
     if @message && @message.valid?
       @message.send_to_recipients
@@ -24,6 +28,11 @@ class Api::V1::MessagesController < Api::V1::BaseController
   end
 
   def update
+    if params[:message] && params[:message][:recipients]
+      collect_recip_ids!
+      @message.send_to_recipients(params[:message][:recipients])
+    end
+
     if @message.update(message_params)
       respond_with @message
     else
@@ -39,13 +48,6 @@ class Api::V1::MessagesController < Api::V1::BaseController
     end
   end
 
-  def forward
-    if @message.update(message_params)
-      @message.send_to_recipients(params[:message][:recipients])
-    end
-    redirect_to api_v1_message_path(@message)
-  end
-
   private
     def message_params
       params.require(:message).permit :subject, :body, recipient_ids: []
@@ -57,10 +59,6 @@ class Api::V1::MessagesController < Api::V1::BaseController
     end
 
     def collect_recip_ids!
-      if params[:message].nil? || params[:message][:recipients].nil?
-        return render_exception('Missing recipients')
-      end
-
       params[:message][:recipient_ids] = []
       params[:message][:recipients].each do |email|
         existing = Contact.find_by_email(email)
