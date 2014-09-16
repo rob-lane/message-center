@@ -11,7 +11,8 @@ MessageCenter.TinymceView = Ember.TextArea.extend({
             view.set('value', editor.getContent());
           });
         });
-      }
+      },
+      plugins:['link']
     });
   },
   suspendValueChange : function(callback) {
