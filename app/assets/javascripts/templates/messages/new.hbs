@@ -1,24 +1,29 @@
-<form {{action "createMessage" on="submit"}}>
-<div class='field-control'>
-  <label for='recipients'>Recipients</label>
-  {{#if dirtyForm}}
-  <div class='form-field-error'>{{errors.recipients}}</div>
-  {{/if}}
-  {{input type="text" id='recipients' name='recipients' class='form-field' valueBinding="model.recipients" autofocus=true}}
-  <div class='field-control'>
-    <label for='subject'>Subject</label>
-    {{input type="text" id='subject' name='subject' class='form-field' valueBinding="model.subject"}}
-  </div>
+<section class="container">
+  <div class="md-col-11">
+    <form {{action "createMessage" on="submit"}}>
+    <div class='form-group'>
+      <label for='recipients'>Recipients</label>
+      {{#if dirtyForm}}
+      <div class='form-field-error'>{{errors.recipients}}</div>
+      {{/if}}
+      {{input type="text" id='recipients' name='recipients' class='form-control' valueBinding="model.recipients" autofocus=true}}
+      <div class='field-group'>
+        <label for='subject'>Subject</label>
+        {{input type="text" id='subject' name='subject' class='form-control' valueBinding="model.subject"}}
+      </div>
 
-  <div class='field-control'>
-    <label for='body'>Body</label>
-    {{#if dirtyForm}}
-    <div class='form-field-error'>{{errors.body}}</div>
-    {{/if}}
-    {{view MessageCenter.TinymceView id='body' name='body' class='form-field' cols='80' rows='6' valueBinding="model.body"}}
-  </div>
+      <div class='form-group'>
+        <label for='body'>Body</label>
+        {{#if dirtyForm}}
+        <div class='form-field-error'>{{errors.body}}</div>
+        {{/if}}
+        {{view MessageCenter.TinymceView id='body' name='body' class='form-control' cols='80' rows='6' valueBinding="model.body"}}
+      </div>
 
-  <div class='field-control'>
-    {{input id='submit-message' type='submit' value='Create'}}
+      <div class='field-control'>
+        {{input id='submit-message' type='submit' value='Create' class='btn btn-primary btn-lg'}}
+      </div>
+      </form>
   </div>
-  </form>
+</section>
+
