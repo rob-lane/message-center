@@ -10,6 +10,10 @@ FactoryGirl.define do
       subject "A test email"
       body "Checkout <a href='http://www.google.com'>google.com</a> or <a href='http://www.yahoo.com'>yahoo</a>"
       recipients {[FactoryGirl.create(:contact, email: 'rspec@tester.com')]}
+
+      factory :message_with_nested_link do
+        body "<p><a href='coolane.com'>Nested Link</a></p>"
+      end
     end
 
     factory :message_with_user, class: :message do

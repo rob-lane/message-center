@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   end
 
   def collect_links
-    Nokogiri::HTML(body).xpath("//body//a").each do |link|
+    Nokogiri::HTML(body).css('a').each do |link|
       self.links.create(url: link['href'] || '')
     end
   end
