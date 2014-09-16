@@ -36,6 +36,19 @@ RSpec.describe Message, :type => :model do
     it "should have associated link objects" do
       expect(subject.links).to_not be_empty
     end
+
+    context "that are nested" do
+
+      subject do
+        FactoryGirl.create(:message_with_nested_link,
+                           user: FactoryGirl.create(:user))
+      end
+
+      it "shuld have an associated link object" do
+        expect(subject.links).to_not be_empty
+      end
+
+    end
   end
 
 

@@ -8,9 +8,9 @@ RSpec.describe Link, :type => :model do
 
     it { is_expected.to be_valid }
 
-    context "with an invalid url" do
+    context "without a url" do
 
-      subject { FactoryGirl.build(:link, url: 'foo') }
+      subject { FactoryGirl.build(:link, url: nil) }
 
       it { is_expected.to_not be_valid }
 

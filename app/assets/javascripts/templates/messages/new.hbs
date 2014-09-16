@@ -4,7 +4,9 @@
     <div class='form-group'>
       <label for='recipients'>Recipients</label>
       {{#if dirtyForm}}
-      <div class='form-field-error'>{{errors.recipients}}</div>
+        {{#if errors.recipients}}
+          <div class='form-field-error'>{{errors.recipients}}</div>
+        {{/if}}
       {{/if}}
       {{input type="text" id='recipients' name='recipients' class='form-control' valueBinding="model.recipients" autofocus=true}}
       <div class='field-group'>
@@ -15,7 +17,9 @@
       <div class='form-group'>
         <label for='body'>Body</label>
         {{#if dirtyForm}}
-        <div class='form-field-error'>{{errors.body}}</div>
+          {{#if errors.body}}
+            <div class='form-field-error'>{{errors.body}}</div>
+          {{/if}}
         {{/if}}
         {{view MessageCenter.TinymceView id='body' name='body' class='form-control' cols='80' rows='6' valueBinding="model.body"}}
       </div>
