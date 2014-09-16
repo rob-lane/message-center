@@ -8,7 +8,7 @@ FactoryGirl.define do
 
     factory :message_with_links, class: :message do
       subject "A test email"
-      body "Checkout http://www.google.com or http://www.yahoo.com"
+      body "Checkout <a href='http://www.google.com'>google.com</a> or <a href='http://www.yahoo.com'>yahoo</a>"
       recipients {[FactoryGirl.create(:contact, email: 'rspec@tester.com')]}
     end
 

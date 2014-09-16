@@ -16,8 +16,8 @@ class Message < ActiveRecord::Base
   end
 
   def collect_links
-    text_body.scan(Link.url_format).map {|m| m[1] }.flatten.each do |url|
-      self.links.create(url: url)
+    Nokogiri::HTML(body).xpath("//body//a").each do |link|
+      self.links.create(url: link['href'] || '')
     end
   end
 
